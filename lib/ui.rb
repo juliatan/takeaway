@@ -104,6 +104,7 @@ class UI
       if user_thinks_cost_is == order.total_cost
         puts cost_confirmed_instruction #SMS!!
         get_client_details
+        break
       else
         raise RuntimeError.new(decline_order_instruction)
       end
@@ -140,7 +141,6 @@ class UI
 
     puts confirmation_sent_instruction
     self.send_sms(user, time)
-    exit
   end
 
   def get_name_instruction
