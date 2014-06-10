@@ -55,13 +55,9 @@ class UI
       
       dish_name = input
       
-      # checkout?(dish_name)
-      break if dish_name == 'checkout'
+      break if checkout?(dish_name)
       
-      # redo_if_dish_not_in_menu(menu, dish_name)
-      check_array = available_dishes_from(menu, dish_name)
-        
-      if check_array.all? { |item| item == false }
+      if dish_not_in_menu?(menu, dish_name)
         puts wrong_dish_instruction
         redo
       end
@@ -70,15 +66,15 @@ class UI
       print prompt
       quantity = input.to_i
 
-      add_to_order(order, menu)
-      
+      add_to_order(order, menu, quantity, dish_name)
+
       puts anything_else_instruction
     end
   end
 
-  # def checkout?(dish_name)
-  #   break if dish_name == 'checkout'
-  # end
+  def checkout?(dish_name)
+    dish_name == 'checkout'
+  end
 
   def available_dishes_from(menu, dish_name)
     menu.contents.map do |dishes|
@@ -86,20 +82,16 @@ class UI
     end
   end
 
-  # def redo_if_dish_not_in_menu(menu, dish_name)
-  #   check_array = available_dishes_from(menu, dish_name)
-        
-  #   if check_array.all? { |item| item == false }
-  #     puts wrong_dish_instruction
-  #     redo
-  #   end
-  # end
+  def dish_not_in_menu?(menu, dish_name)
+    check_array = available_dishes_from(menu, dish_name)
+    check_array.all? { |item| item == false }
+  end
 
   def wrong_dish_instruction
     "Sorry, this dish does not exist, please try again"
   end
 
-  def add_to_order(order, menu)
+  def add_to_order(order, menu, quantity, dish_name)
     selected_dish = menu.contents.select do |dish|
       dish[:name] == dish_name
     end
