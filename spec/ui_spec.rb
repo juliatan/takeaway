@@ -20,7 +20,7 @@ describe UI do
     allow(STDOUT).to receive(:puts) # stub out all puts statements
     allow(ui).to receive(:prompt) { "" }
     expect(ui).to receive(:input) { "Julia" } #stub out gets.chomp
-    expect(ui).to receive(:input) { "447789223025" }
+    expect(ui).to receive(:input) { "+447789223025" }
 
     # note the order that this is written in
     client = double Client # for the send_sms expectation below
