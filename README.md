@@ -24,5 +24,15 @@ How to use
 ----------
 
 ```shell
+git clone git@github.com:juliatan/takeaway.git
+cd takeaway
 ruby takeaway.rb
+```
+
+How to run tests
+----------------
+
+```shell
+cd takeaway
+rspec
 ```
